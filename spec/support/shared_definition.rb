@@ -2,6 +2,10 @@
 
 RSpec.shared_examples "fixture definition" do |constant, expect_fixture_path|
   context "minimal setup for class" do
+    let(:prefix) do
+      File.basename(expect_fixture_path).gsub(".yml", "")
+    end
+
     before do
       @subject = described_class.new
     end
@@ -12,7 +16,7 @@ RSpec.shared_examples "fixture definition" do |constant, expect_fixture_path|
     end
 
     it "#slug_prefix" do
-      expect(@subject.slug_prefix).to eq("users")
+      expect(@subject.slug_prefix).to eq(prefix)
     end
 
     it "#file" do

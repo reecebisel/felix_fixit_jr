@@ -50,7 +50,7 @@ module FelixFixtureJr
     def fixtures
       constant.all.each_with_index.map do |instance, index|
         {
-          slug(index: index) => filter(instance.attributes)
+          slug(index: index, instance: instance) => filter(instance.attributes)
         }.to_yaml.gsub!("---", "")
       end
     end
@@ -65,7 +65,7 @@ module FelixFixtureJr
       FelixFixtureJr.blacklisted_attributes + blacklisted_attributes
     end
 
-    def slug(index: nil)
+    def slug(index: nil, instance: nil)
       @slug ||= [slug_prefix, index].join('_')
     end
 
